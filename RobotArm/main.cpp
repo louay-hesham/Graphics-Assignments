@@ -35,26 +35,28 @@ int main(int argc, char** argv)
     return 0;
 }
 
+void display_base(double mult, int phaseShift)
+{
+    glMatrixMode( GL_PROJECTION );
+    glLoadIdentity();
+    glOrtho( -2, 2, -2, 2, -1, 1 );
+    glMatrixMode( GL_MODELVIEW );
+    glLoadIdentity();
+    glPushMatrix();
+    glRotated(phaseShift, 0, 0, 1);
+    glTranslatef(0.0f,0.0f,0.0f);
+    renderPrimitive(mult);
+}
+
 void display(void)
 {
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    glMatrixMode( GL_PROJECTION );
-    glLoadIdentity();
-    glOrtho( -2, 2, -2, 2, -1, 1 );
-    glMatrixMode( GL_MODELVIEW );
-    glLoadIdentity();
-    glPushMatrix();
-    glTranslatef(0.0f,0.0f,0.0f);
-    renderPrimitive(1);
 
-    glMatrixMode( GL_PROJECTION );
-    glLoadIdentity();
-    glOrtho( -2, 2, -2, 2, -1, 1 );
-    glMatrixMode( GL_MODELVIEW );
-    glLoadIdentity();
-    glPushMatrix();
-    glTranslatef(0.0f,0.0f,0.0f);
-    renderPrimitive(2);
+    display_base(1,0);
+    display_base(1,60);
+    display_base(1,120);
+    display_base(1,180);
+
     glPopMatrix();
     glutSwapBuffers();
 }
