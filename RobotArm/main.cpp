@@ -13,7 +13,7 @@ using namespace std;
 void display(void);
 void idle(void);
 void init();
-void renderPrimitive();
+void renderPrimitive(double mult);
 double degressToRadian(int d);
 
 double L1, L2;
@@ -46,6 +46,15 @@ void display(void)
     glPushMatrix();
     glTranslatef(0.0f,0.0f,0.0f);
     renderPrimitive(1);
+
+    glMatrixMode( GL_PROJECTION );
+    glLoadIdentity();
+    glOrtho( -2, 2, -2, 2, -1, 1 );
+    glMatrixMode( GL_MODELVIEW );
+    glLoadIdentity();
+    glPushMatrix();
+    glTranslatef(0.0f,0.0f,0.0f);
+    renderPrimitive(2);
     glPopMatrix();
     glutSwapBuffers();
 }
@@ -69,10 +78,10 @@ void drawCircle(float radius)
    glEnd();
 }
 
-void renderPrimitive()
+void renderPrimitive(double mult)
 {
     glLineWidth(50.0);
-    glRotated(th1, 0, 0, 1);
+    glRotated(th1*mult, 0, 0, 1);
     glBegin(GL_LINES);
         glColor3f(0.0, 1.0, 0.0);
         glVertex2f(0.0,0.0);
@@ -83,19 +92,19 @@ void renderPrimitive()
 
     drawCircle(0.1);
 
-    glRotated(th2, 0, 0, 1);
+    glRotated(th2*mult, 0, 0, 1);
     glBegin(GL_LINES);
         glColor3f(1.0, 0.0, 0.0);
         glVertex2f(0.0,0.0);
         glVertex2f(L2,0.0);
     glEnd();
-    glRotated(-th2, 0, 0, 1);
+    glRotated(-th2*mult, 0, 0, 1);
 
-    double x_rel = L2 * cos(degressToRadian(th2));
-    double y_rel = L2 * sin(degressToRadian(th2));
+    double x_rel = L2 * cos(degressToRadian(th2*mult));
+    double y_rel = L2 * sin(degressToRadian(th2*mult));
     glTranslated(x_rel, y_rel, 0.0);
-    glRotated(th2, 0, 0, 1);
-    glRotated(th3, 0, 0, 1);
+    glRotated(th2*mult, 0, 0, 1);
+    glRotated(th3*mult, 0, 0, 1);
     glBegin(GL_LINES);
         glColor3f(0.0, 1.0, 1.0);
 
@@ -117,6 +126,13 @@ void renderPrimitive()
     th3 += m;
     if (th3 > 60 || th3 < -60)
         m *= -1;
+    glRotated(-th3*mult, 0, 0, 1);
+    glRotated(-th2*mult, 0, 0, 1);
+    glTranslated(-x_rel, -y_rel, 0.0);
+    glRotated(th2*mult, 0, 0, 1);
+    glRotated(-th2*mult, 0, 0, 1);
+    glTranslated(-L1, 0.0, 0.0);
+    glRotated(-th1*mult, 0, 0, 1);
 }
 
 void idle(void)
