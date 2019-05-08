@@ -32,14 +32,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-<<<<<<< HEAD
-		<Unit filename="f.m" />
-		<Unit filename="get_angles.m" />
 		<Unit filename="main.cpp" />
-		<Unit filename="octave_bash.sh" />
-=======
-		<Unit filename="main.cpp" />
->>>>>>> a0e51a2474bf347b3d56efc63a4dd30b7a29668d
 		<Extensions>
 			<code_completion />
 			<envvars />

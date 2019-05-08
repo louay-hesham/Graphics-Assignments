@@ -53,9 +53,9 @@ void display(void)
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
     display_base(1,0);
-    display_base(1,60);
-    display_base(1,120);
+    display_base(1,90);
     display_base(1,180);
+    display_base(1,270);
 
     glPopMatrix();
     glutSwapBuffers();
