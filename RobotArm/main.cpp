@@ -17,7 +17,7 @@ void renderPrimitive(double mult);
 double degressToRadian(int d);
 
 double L1, L2;
-int th1=0, th2=0, th3=-60, m=6;
+int th1=0, th2=0, th3=-60, m=3;
 
 int main(int argc, char** argv)
 {
